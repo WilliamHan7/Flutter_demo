@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'demo/zhihu/zhihu_page.dart';
+import 'demo/CloudMusic/cloud_music_page.dart';
 
 class IndexPage extends StatelessWidget {
   const IndexPage({
@@ -31,12 +32,24 @@ class GenListView extends StatelessWidget {
       child: Column(
         children: <Widget>[
           FlatButton(
+            color: Colors.yellow,
+            textColor: Colors.white,
             onPressed: (){
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) =>ZhiHuPage(title:'知乎'))
               );
             },
             child: Text('知乎'),
+          ),
+          FlatButton(
+            color: Colors.yellow,
+            textColor: Colors.white,
+            onPressed: (){
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) =>CloudMusicPage(title:'网易云音乐'))
+              );
+            },
+            child: Text('网易云'),
           )
         ],
       ),
