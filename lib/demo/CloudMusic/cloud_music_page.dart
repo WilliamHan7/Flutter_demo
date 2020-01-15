@@ -57,7 +57,11 @@ class _CloudMusicPageState extends State<CloudMusicPage> with SingleTickerProvid
         backgroundColor: Colors.white,
       ),
       backgroundColor: Colors.white,
-      body: TabBarView(
+      body:Theme(
+        data: Theme.of(context).copyWith(
+          primaryColor: Colors.red,
+        ), 
+        child: TabBarView(
         controller: _tabController,
         children: <Widget>[
           MyPage(),//我的
@@ -67,6 +71,7 @@ class _CloudMusicPageState extends State<CloudMusicPage> with SingleTickerProvid
          
         ],
       ),
+    )
     );
   }
 }
