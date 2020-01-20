@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class RightIcon extends StatelessWidget {
   const RightIcon({Key key, this.name, this.imgs}) : super(key: key);
@@ -97,9 +98,8 @@ class MyTitle extends StatelessWidget {
   final String buttontext;
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
     return Container(
-      padding: EdgeInsets.fromLTRB(15, 20, 15, 15),
+      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -111,12 +111,12 @@ class MyTitle extends StatelessWidget {
                 color: Colors.black),
           ),
           Container(
-            height: ScreenUtil().setHeight(50.0),
-            width: ScreenUtil().setWidth(165.0),
+            height: 22,
+            width: 70,
             child: OutlineButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
-              child: Text(buttontext),
+              child: Text(buttontext,style: TextStyle(fontSize: 12),),
               onPressed: () {
                 print('点击了更多');
               },
@@ -147,20 +147,25 @@ class MusicItme extends StatelessWidget {
         print("ww");
       },
       child: Container(
-        width: ScreenUtil().setWidth(245),
-        height: ScreenUtil().setHeight(320),
+        margin: EdgeInsets.fromLTRB(4, 4, 4, 4),
+        width: ScreenUtil().setWidth(230),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              width: ScreenUtil().setWidth(245),
-              height: ScreenUtil().setHeight(245),
-              decoration: BoxDecoration(
-                  image: DecorationImage(image: NetworkImage(bgImagesUrl)),
-                  borderRadius: BorderRadius.circular(18)),
+              width: ScreenUtil().setWidth(230),
               child: Stack(
                 children: <Widget>[
+                  ClipRRect(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5),
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: bgImagesUrl,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                   Positioned(
                     right: 10,
                     top: 0,
@@ -293,9 +298,15 @@ class MusicList extends StatelessWidget {
           leading: Container(
             width: ScreenUtil().setWidth(110),
             height: ScreenUtil().setHeight(110),
-            decoration: BoxDecoration(
-                image: DecorationImage(image: NetworkImage(imagesUrl)),
-                borderRadius: BorderRadius.circular(10)),
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+              child: CachedNetworkImage(
+                imageUrl: imagesUrl,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           title: Text(title),
           subtitle: Container(
@@ -314,13 +325,26 @@ class MusicList extends StatelessWidget {
 
 //云村关注卡片
 class VillageCard extends StatelessWidget {
-  const VillageCard({Key key}) : super(key: key);
-
+  const VillageCard({
+    Key key,
+    this.cardAvatorImg,
+    this.cardAvatorName,
+    this.cardAvatorNum,
+    this.cardText,
+    this.cardImg,
+    this.cardAvatorBrief,
+  }) : super(key: key);
+  final String cardAvatorImg;
+  final String cardAvatorName;
+  final String cardAvatorNum;
+  final String cardText;
+  final String cardImg;
+  final String cardAvatorBrief;
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-      height: ScreenUtil().setHeight(400),
+      padding: EdgeInsets.fromLTRB(10, 2, 10, 2),
+      height: 190.0,
       child: Card(
         color: Color(0xfff3f3f3),
         elevation: 0, //设置阴影
@@ -329,29 +353,170 @@ class VillageCard extends StatelessWidget {
         child: Column(
           // card只能有一个widget，但这个widget内容可以包含其他的widget
           children: [
-            ListTile(
-              title: Text('标题', style: TextStyle(fontWeight: FontWeight.w500)),
-              subtitle: Text('子标题'),
-              leading: ClipRRect(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(50.0),
-                ),
-                child: Image.network(
-                  "https://upload.jianshu.io/users/upload_avatars/1234161/bd064d4aa493.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96/format/webp",
-                  fit: BoxFit.cover,
-                ),
-              ),
+            Container(
+              height: 65.0,
+              child: ListTile(
+                  title: Text(cardAvatorName,
+                      style: TextStyle(fontWeight: FontWeight.w500)),
+                  subtitle: Text(cardAvatorNum),
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(50.0),
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: cardAvatorImg,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  trailing: Container(
+                    height: 30,
+                    width: 80,
+                    child: RaisedButton.icon(
+                      onPressed: () {
+                        print('关注');
+                      },
+                      elevation: 0,
+                      textColor: Color(0xffffffff),
+                      label: Text('关注'),
+                      icon: Icon(
+                        Icons.add,
+                        color: Color(0xffffffff),
+                        size: 16,
+                      ),
+                      color: Theme.of(context).primaryColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                    ),
+                  )),
             ),
             Divider(),
-            ListTile(
-              title: Text('内容一', style: TextStyle(fontWeight: FontWeight.w500)),
-              leading: Icon(
-                Icons.contact_phone,
-                color: Colors.blue[500],
+            Container(
+              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      cardText,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 4,
+                    ),
+                    flex: 1,
+                  ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    child: CachedNetworkImage(
+                      imageUrl: cardImg,
+                      fit: BoxFit.cover,
+                      width: 70,
+                      height: 70,
+                    ),
+                  )
+                ],
               ),
             ),
+            Container(
+              padding: EdgeInsets.fromLTRB(10, 5, 10, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    cardAvatorBrief,
+                    style: TextStyle(fontSize: 12, color: Color(0xff666666)),
+                  ),
+                  Icon(
+                    Icons.close,
+                    size: 18,
+                    color: Color(0xff666666),
+                  )
+                ],
+              ),
+            )
           ],
         ),
+      ),
+    );
+  }
+}
+
+//雲村瀑布流
+class TileCard extends StatelessWidget {
+  final String img;
+  final String title;
+  final String author;
+  final String authorUrl;
+  final String type;
+  final double worksAspectRatio;
+  TileCard(
+      {this.img,
+      this.title,
+      this.author,
+      this.authorUrl,
+      this.type,
+      this.worksAspectRatio});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.deepOrange,
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(20))),
+            child: CachedNetworkImage(imageUrl: '$img'),
+          ),
+          Container(
+            padding:
+                EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(20)),
+            margin: EdgeInsets.symmetric(vertical: ScreenUtil().setWidth(10)),
+            child: Text(
+              '$title',
+              style: TextStyle(fontSize: ScreenUtil().setSp(24)),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(
+                left: ScreenUtil().setWidth(20),
+                bottom: ScreenUtil().setWidth(20)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                CircleAvatar(
+                  backgroundImage: NetworkImage('$authorUrl'),
+                  radius: ScreenUtil().setWidth(20),
+                  // maxRadius: 40.0,
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
+                  width: ScreenUtil().setWidth(160),
+                  child: Text(
+                    '$author',
+                    style: TextStyle(
+                        fontSize: ScreenUtil().setSp(20),
+                        color: Color(0xff999999)),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: ScreenUtil().setWidth(20)),
+                  child: Text(
+                    '${type == 'EXISE' ? '练习' : '其他'}',
+                    style: TextStyle(
+                      fontSize: ScreenUtil().setSp(20),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

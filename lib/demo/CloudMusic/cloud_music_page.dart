@@ -46,10 +46,11 @@ class _CloudMusicPageState extends State<CloudMusicPage>
 
   @override
   Widget build(BuildContext context) {
+    ThemeData themeData = Theme.of(context);
     return Scaffold(
         appBar: AppBar(
           leading: Icon(
-            Icons.reorder,
+            IconData(0xe60a,fontFamily:'iconfont'),
             color: Colors.black,
           ),
           title: TabBar(
@@ -62,7 +63,7 @@ class _CloudMusicPageState extends State<CloudMusicPage>
           ),
           actions: <Widget>[
             Icon(
-              Icons.search,
+              IconData(0xe623, fontFamily: 'iconfont'),
               color: Colors.black,
             ),
             SizedBox(
@@ -75,9 +76,13 @@ class _CloudMusicPageState extends State<CloudMusicPage>
         backgroundColor: Colors.white,
         drawer: DrawerPage(),
         body: Theme(
-            data: Theme.of(context).copyWith(
-              primaryColor: Color(0XFFD23023),
-            ),
+            // data: Theme.of(context).copyWith(
+            //   primaryColor: Color(0XFFD23023),
+            // ),
+            data: themeData.copyWith(
+                primaryColor: Color(0XFFFE3A3B),
+                
+              ),
             child: Stack(
               children: <Widget>[
                 TabBarView(
@@ -101,7 +106,6 @@ class _CloudMusicPageState extends State<CloudMusicPage>
 
 class BottomMusicPlay extends StatelessWidget {
   const BottomMusicPlay({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -125,6 +129,9 @@ class BottomMusicPlay extends StatelessWidget {
           Container(
             child: Row(
               children: <Widget>[
+                SizedBox(
+                  width: 5,
+                ),
                 ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                   child: Image.network(
@@ -156,19 +163,19 @@ class BottomMusicPlay extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 IconButton(
-                  icon: Icon(IconData(0xe8dd,fontFamily:'iconfont')),
+                  icon: Icon(IconData(0xe657,fontFamily:'iconfont')),
                   onPressed:(){
                     print("play");
                   },
-                  iconSize: 30,
+                  iconSize: 33,
                   color: Color(0XFF666666),
                 ),
                 IconButton(
-                  icon: Icon(IconData(0xe691,fontFamily:'iconfont')),
+                  icon: Icon(IconData(0xe62a,fontFamily:'iconfont')),
                   onPressed:(){
                     print("list");
                   },
-                  iconSize: 30,
+                  iconSize: 33,
                   color: Color(0XFF666666),
                 )
               ],

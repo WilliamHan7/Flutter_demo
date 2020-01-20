@@ -152,7 +152,7 @@ class Listview extends StatelessWidget {
             },
           ),
           MyList(
-            leftIcon:IconData(0xe629,fontFamily:'iconfont'),
+            leftIcon:IconData(0xe639,fontFamily:'iconfont'),
             text: "我的收藏",
             onTap: () {
               print('我的收藏');

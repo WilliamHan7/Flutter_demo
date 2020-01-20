@@ -33,6 +33,7 @@ class DrawerPage extends StatelessWidget {
                 ),
               ),
               FourIcon(),
+              Divider(),
               DrawerItem(),
             ],
           ),
@@ -42,7 +43,7 @@ class DrawerPage extends StatelessWidget {
             child: BottomDraw(),
           ),
           Positioned(
-            top: 160,
+            top: 180,
             left: 20,
             child: MemberBlack(),
           )
@@ -95,13 +96,7 @@ class FourIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(bottom: 20, top: 50),
-      decoration: BoxDecoration(
-          border: Border(
-              bottom: BorderSide(
-                  color: Color(0Xff333333),
-                  style: BorderStyle.solid,
-                  width: 0.5))),
+      padding: EdgeInsets.only(bottom: 20, top: ScreenUtil().setHeight(100)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
@@ -230,10 +225,12 @@ class BottomDraw extends StatelessWidget {
           RaisedButton.icon(
             onPressed: () {
               print("夜间模式");
-              
             },
             color: Colors.white,
-            icon: Icon(IconData(0xe607, fontFamily: 'iconfont'),size: 20,),
+            icon: Icon(
+              IconData(0xe607, fontFamily: 'iconfont'),
+              size: 20,
+            ),
             label: Text("夜间模式"),
             elevation: 0,
           ),
@@ -242,7 +239,10 @@ class BottomDraw extends StatelessWidget {
               print("设置");
             },
             color: Colors.white,
-            icon: Icon(IconData(0xe618, fontFamily: 'iconfont'),size: 20,),
+            icon: Icon(
+              IconData(0xe618, fontFamily: 'iconfont'),
+              size: 20,
+            ),
             label: Text("设置"),
             elevation: 0,
           ),
@@ -251,7 +251,10 @@ class BottomDraw extends StatelessWidget {
               print("退出");
             },
             color: Colors.white,
-            icon: Icon(IconData(0xe604, fontFamily: 'iconfont'),size: 20,),
+            icon: Icon(
+              IconData(0xe604, fontFamily: 'iconfont'),
+              size: 20,
+            ),
             label: Text("退出"),
             elevation: 0,
           ),
@@ -268,11 +271,11 @@ class MemberBlack extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        top: 5,
+        top: 3,
         left: 10,
         right: 10,
       ),
-      height: ScreenUtil().setHeight(120),
+      height: ScreenUtil().setHeight(100),
       width: ScreenUtil().setWidth(480),
       decoration: BoxDecoration(
           color: Color(0xFF212121),

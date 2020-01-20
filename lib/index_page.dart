@@ -7,16 +7,19 @@ class IndexPage extends StatelessWidget {
   const IndexPage({
     Key key,
     this.title,
-    }) : super(key: key);
-    final String title;
+  }) : super(key: key);
+  final String title;
   @override
   Widget build(BuildContext context) {
-     ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
+    ScreenUtil.instance = ScreenUtil(width: 750, height: 1334)..init(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(title, style: TextStyle(fontSize: 18, color: Theme.of(context).accentColor),),
+        title: Text(
+          title,
+          style: TextStyle(fontSize: 18, color: Theme.of(context).accentColor),
+        ),
         elevation: 0.5,
-        backgroundColor:Colors.white,
+        backgroundColor: Colors.white,
       ),
       body: Container(
         child: GenListView(),
@@ -27,7 +30,7 @@ class IndexPage extends StatelessWidget {
 
 class GenListView extends StatelessWidget {
   const GenListView({Key key}) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,20 +39,18 @@ class GenListView extends StatelessWidget {
           FlatButton(
             color: Colors.yellow,
             textColor: Colors.white,
-            onPressed: (){
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) =>ZhiHuPage(title:'知乎'))
-              );
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ZhiHuPage(title: '知乎')));
             },
             child: Text('知乎'),
           ),
           FlatButton(
             color: Colors.yellow,
             textColor: Colors.white,
-            onPressed: (){
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) =>CloudMusicPage(title:'网易云音乐'))
-              );
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => CloudMusicPage(title: '网易云音乐')));
             },
             child: Text('网易云'),
           )
